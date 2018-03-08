@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace _01_PARSER_Test_Module
@@ -8,33 +10,61 @@ namespace _01_PARSER_Test_Module
     {
         static void Main(string[] args)
         {
-            ClearLog();
-            ClearSeedFile();
-            UpdateLog("Seed file and Log file reset");
-
-            // 0. Size of the project array - 32*32
+            // 0. Size of the project array - 16*16
             // 1. Seed a random array
             // 2. Write the seed into SeedMap.txt
 
+            // set parameters
+            string seedPath = @"..\data\SeedMap.txt";
+            int mapSize = 16;
+            // string logPath = @"..\data\WorkLog.txt";
+            
+            List<int> layerTempArray = new List<int>();
+
+            ClearLog();
+            ClearSeedFile();
+            UpdateLog("Seed file and Log file reset");
+            
             // 1. Seed a random array
             Random buzzer = new Random();
-            int[] seedArray = new int[1024];
+            int[] seedArray = new int[mapSize* mapSize];
 
             for (int ii = 0; ii < seedArray.Length-1; ii++)
             {
-                int newRND = buzzer.Next(0, 256);
-                seedArray[ii] = newRND;
+                seedArray[ii] = buzzer.Next(0, 256);
             }
 
             // Write the array into SeedMap.txt
             string seedArrayString = string.Join("|" , seedArray);
-            System.IO.File.WriteAllText(@"..\data\SeedMap.txt", seedArrayString);
+            System.IO.File.WriteAllText(seedPath, seedArrayString);
 
             // Note Down in WorkLog.txt
             UpdateLog("ReSeed");
             UpdateLog("Seed -> SeedMap.txt");
 
-            Console.WriteLine();
+            // Read and Parse the SeedFile
+            string incomingStringArray = File.ReadAllText(seedPath);
+            layerTempArray = incomingStringArray.Split(new char[] { '|' }).Select(v => int.Parse(v)).ToList();
+            UpdateLog("SeedMap.txt -> Map");
+
+            // Control Output
+            DisplayMap(layerTempArray, mapSize);
+            UpdateLog("TEST PRINT");
+        }
+
+        private static void DisplayMap(List<int> layerTempArray, int mapSize)
+        {
+            int counter = 0;
+            foreach (var cell in layerTempArray)
+            {
+                int intValue = (int)cell;
+                Console.Write($"[{intValue:d3}]");
+                if ((counter+1) % mapSize == 0)
+                {
+                    Console.WriteLine();
+                }
+                counter++;
+            }
         }
 
         private static void ClearSeedFile()

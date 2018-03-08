@@ -1,3 +1,5 @@
-[8.3.2018 г. 19:40:19] Seed file and Log file reset 
-[8.3.2018 г. 19:40:19] ReSeed 
-[8.3.2018 г. 19:40:19] Seed -> SeedMap.txt 
+[8.3.2018 г. 20:09:23] Seed file and Log file reset 
+[8.3.2018 г. 20:09:23] ReSeed 
+[8.3.2018 г. 20:09:23] Seed -> SeedMap.txt 
+[8.3.2018 г. 20:09:23] SeedMap.txt -> Map 
+[8.3.2018 г. 20:09:23] TEST PRINT 

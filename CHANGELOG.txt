@@ -1,0 +1,6 @@
+- added the ChangeLog file
+- minor code fix
+- moved GamePlan to the main folder
+- added reading from the Seed file
+- added basic print of the Map
+=============
