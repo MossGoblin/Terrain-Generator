@@ -1,0 +1,23 @@
+1. Read / Write map from file
+2. Keep the colouring schemes in a file
+3. Use series of kernels to edit the map
+4. For 1 and 2  - work out appropirate syntaxes for each case
+5. Primary layer - the terrain itself; Secondary layers, based on the primary layer - floodlands, plateaus
+5.1 Secondary layer variables kept in a file
+
+=========
+
+1.1 First row - metadata - what does it include ??
+-- size of the terrain (aut-calculated before Write)
+-- names of settings files and secondary layers files ??
+1.2 Three values (RGB) with two separators ?? 
+ex: '|' - between cells
+	',' - between values
+192,155,92|120,155,62|120,155,62
+
+=========
+
+PARSER
+NEW TERRAIN or OLD TERRAIN
+(what happens to teh records of the old terrain if a new one is created ??)
+
