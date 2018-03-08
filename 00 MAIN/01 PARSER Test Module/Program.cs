@@ -8,7 +8,10 @@ namespace _01_PARSER_Test_Module
     {
         static void Main(string[] args)
         {
-            string logMessage = "";
+            ClearLog();
+            ClearSeedFile();
+            UpdateLog("Seed file and Log file reset");
+
             // 0. Size of the project array - 32*32
             // 1. Seed a random array
             // 2. Write the seed into SeedMap.txt
@@ -28,13 +31,26 @@ namespace _01_PARSER_Test_Module
             System.IO.File.WriteAllText(@"..\data\SeedMap.txt", seedArrayString);
 
             // Note Down in WorkLog.txt
-
-            logMessage = $"[{DateTime.Now}] ReSeed {Environment.NewLine}";
-            System.IO.File.AppendAllText(@"..\data\WorkLog.txt", logMessage);
-            logMessage = $"[{DateTime.Now}] Seed -> SeedMap.txt {Environment.NewLine}";
-            System.IO.File.AppendAllText(@"..\data\WorkLog.txt", logMessage);
+            UpdateLog("ReSeed");
+            UpdateLog("Seed -> SeedMap.txt");
 
             Console.WriteLine();
+        }
+
+        private static void ClearSeedFile()
+        {
+            System.IO.File.Delete(@"..\data\SeedMap.txt");
+        }
+
+        private static void ClearLog()
+        {
+            System.IO.File.Delete(@"..\data\WorkLog.txt");
+        }
+
+        private static void UpdateLog(string logMessage)
+        {
+            logMessage = $"[{DateTime.Now}] {logMessage} {Environment.NewLine}";
+            System.IO.File.AppendAllText(@"..\data\WorkLog.txt", logMessage);
         }
     }
 }
