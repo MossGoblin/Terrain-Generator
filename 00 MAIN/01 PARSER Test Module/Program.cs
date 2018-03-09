@@ -15,8 +15,8 @@ namespace _01_PARSER_Test_Module
             // 2. Write the seed into SeedMap.txt
 
             // set parameters
-            string seedPath = @"..\data\SeedMap.txt";
-            int mapSize = 16;
+            // string seedPath = @"..\data\SeedMap.txt";
+            // int mapSize = 16;
             // string logPath = @"..\data\WorkLog.txt";
             
             List<int> layerTempArray = new List<int>();
@@ -27,7 +27,7 @@ namespace _01_PARSER_Test_Module
             
             // 1. Seed a random array
             Random buzzer = new Random();
-            int[] seedArray = new int[mapSize* mapSize];
+            int[] seedArray = new int[Globals.mapSize * Globals.mapSize];
 
             for (int ii = 0; ii < seedArray.Length-1; ii++)
             {
@@ -36,19 +36,19 @@ namespace _01_PARSER_Test_Module
 
             // Write the array into SeedMap.txt
             string seedArrayString = string.Join("|" , seedArray);
-            System.IO.File.WriteAllText(seedPath, seedArrayString);
+            System.IO.File.WriteAllText(Globals.seedPath, seedArrayString);
 
             // Note Down in WorkLog.txt
             UpdateLog("ReSeed");
             UpdateLog("Seed -> SeedMap.txt");
 
             // Read and Parse the SeedFile
-            string incomingStringArray = File.ReadAllText(seedPath);
+            string incomingStringArray = File.ReadAllText(Globals.seedPath);
             layerTempArray = incomingStringArray.Split(new char[] { '|' }).Select(v => int.Parse(v)).ToList();
             UpdateLog("SeedMap.txt -> Map");
 
             // Control Output
-            DisplayMap(layerTempArray, mapSize);
+            DisplayMap(layerTempArray, Globals.mapSize);
             UpdateLog("TEST PRINT");
         }
 
@@ -69,18 +69,18 @@ namespace _01_PARSER_Test_Module
 
         private static void ClearSeedFile()
         {
-            System.IO.File.Delete(@"..\data\SeedMap.txt");
+            System.IO.File.Delete(Globals.seedPath);
         }
 
         private static void ClearLog()
         {
-            System.IO.File.Delete(@"..\data\WorkLog.txt");
+            System.IO.File.Delete(Globals.seedPath);
         }
 
         private static void UpdateLog(string logMessage)
         {
             logMessage = $"[{DateTime.Now}] {logMessage} {Environment.NewLine}";
-            System.IO.File.AppendAllText(@"..\data\WorkLog.txt", logMessage);
+            System.IO.File.AppendAllText(Globals.logPath, logMessage);
         }
     }
 }

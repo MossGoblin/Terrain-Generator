@@ -4,3 +4,5 @@
 - added reading from the Seed file
 - added basic print of the Map
 =============
+09 Mar
+- added Globals.cs class to keep the global variables - file paths and map size
